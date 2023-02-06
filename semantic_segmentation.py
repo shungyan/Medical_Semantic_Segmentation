@@ -104,8 +104,9 @@ def main():
   args = parser.parse_args()
 
   #interpreter = make_interpreter(args.model, device=':0')
-  interpreter = tflite.Interpreter(args.model,
-  experimental_delegates=[tflite.load_delegate('edgetpu.dll')])
+  # interpreter = tflite.Interpreter(args.model,
+  # experimental_delegates=[tflite.load_delegate('edgetpu.dll')])
+  interpreter = tflite.Interpreter(model_path=args.model)
   interpreter.allocate_tensors()
   width, height = common.input_size(interpreter)
 
