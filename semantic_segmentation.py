@@ -35,8 +35,8 @@ from PIL import Image
 
 from pycoral.adapters import common
 from pycoral.adapters import segment
-from pycoral.utils.edgetpu import make_interpreter
-#import tflite_runtime.interpreter as tflite
+# from pycoral.utils.edgetpu import make_interpreter
+import tflite_runtime.interpreter as tflite
 
 
 def create_pascal_label_colormap():
@@ -103,10 +103,10 @@ def main():
           'bounding box of detection result may be stretched.'))
   args = parser.parse_args()
 
-  interpreter = make_interpreter(args.model, device=':0')
+  #interpreter = make_interpreter(args.model, device=':0')
   # interpreter = tflite.Interpreter(args.model,
   # experimental_delegates=[tflite.load_delegate('edgetpu.dll')])
-  #interpreter = tflite.Interpreter(model_path=args.model)
+  interpreter = tflite.Interpreter(model_path=args.model)
   interpreter.allocate_tensors()
   width, height = common.input_size(interpreter)
 
