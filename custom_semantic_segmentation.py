@@ -9,7 +9,8 @@ from pycoral.utils.edgetpu import make_interpreter
 import tflite_runtime.interpreter as tflite
 
 def main():
-    interpreter = tflite.Interpreter(model_path="model.tflite")
+    interpreter = make_interpreter("model.tflite", device=':0')
+    #interpreter = tflite.Interpreter(model_path="model.tflite")
     interpreter.allocate_tensors()
 
     width, height = common.input_size(interpreter)
