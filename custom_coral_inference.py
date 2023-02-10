@@ -34,7 +34,7 @@ output_details = interpreter.get_output_details()
 
 input_shape = input_details[0]['shape']
 #input_data = np.array(np.random.random_sample(input_shape), dtype=input_details[0]['dtype'])
-input_data=np.load('input.npy')
+input_data=np.load('new_input.npy')
 interpreter.set_tensor(input_details[0]['index'], input_data)
 
 # inference_time = 0
