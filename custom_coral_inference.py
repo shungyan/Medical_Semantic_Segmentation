@@ -34,16 +34,18 @@ output_details = interpreter.get_output_details()
 
 input_shape = input_details[0]['shape']
 #input_data = np.array(np.random.random_sample(input_shape), dtype=input_details[0]['dtype'])
-input_data=np.load('new_input.npy')
+input_data=np.load('input.npy')
+input_data=np.float32(input_data)
+input_data=np.array(input_data).reshape(1,128,128,1)
 interpreter.set_tensor(input_details[0]['index'], input_data)
 
-# inference_time = 0
-# count = 100
-# for i in range(count):
-#     start = time.perf_counter()
-#     interpreter.invoke()
-#     inference_time += time.perf_counter() - start
-# print('%.2f ms' % (inference_time * 1000/count))
+inference_time = 0
+count = 100
+for i in range(count):
+    start = time.perf_counter()
+    interpreter.invoke()
+    inference_time += time.perf_counter() - start
+print('%.2f ms' % (inference_time * 1000/count))
 
 output_data = interpreter.get_tensor(output_details[0]['index'])
 output_img=output_data[0,:,:,0]
